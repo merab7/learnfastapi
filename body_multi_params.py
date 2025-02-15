@@ -4,12 +4,13 @@ First, of course, you can mix Path, Query and request body parameter declaration
 And you can also declare body parameters as optional, by setting the default to None:
 """
 
-from typing import Annotated
-
-from fastapi import FastAPI, Path, Body
-from pydantic import BaseModel
-
-app = FastAPI()
+#
+# from typing import Annotated
+#
+# from fastapi import FastAPI, Path, Body
+# from pydantic import BaseModel
+#
+# app = FastAPI()
 
 
 # class Item(BaseModel):
@@ -94,33 +95,33 @@ But you can instruct FastAPI to treat it as another body key using Body:
 #     return results
 
 
-class Item(BaseModel):
-    name: str
-    description: str | None = None
-    price: float
-    tax: float | None = None
+# class Item(BaseModel):
+#     name: str
+#     description: str | None = None
+#     price: float
+#     tax: float | None = None
+#
 
-
-class User(BaseModel):
-    username: str
-    full_name: str | None = None
-
-
-@app.put("/items/{item_id}")
-async def update_item(
-    *,
-    item_id: int,
-    item: Item,
-    user: User,
-    importance: Annotated[int, Body(gt=0)],
-    q: str | None = None,
-):
-    results = {
-        "item_id": item_id,
-        "item": item,
-        "user": user,
-        "importance": importance,
-    }
-    if q:
-        results.update({"q": q})
-    return results
+# class User(BaseModel):
+#     username: str
+#     full_name: str | None = None
+#
+#
+# @app.put("/items/{item_id}")
+# async def update_item(
+#     *,
+#     item_id: int,
+#     item: Item,
+#     user: User,
+#     importance: Annotated[int, Body(gt=0)],
+#     q: str | None = None,
+# ):
+#     results = {
+#         "item_id": item_id,
+#         "item": item,
+#         "user": user,
+#         "importance": importance,
+#     }
+#     if q:
+#         results.update({"q": q})
+#     return results
